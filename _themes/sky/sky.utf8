@@ -4,7 +4,7 @@ readonly=true
 version=4.00
 format=2.00
 title=Sky
-refcount=1
+refcount=2
 
 [titles]
 1040=Cielo
