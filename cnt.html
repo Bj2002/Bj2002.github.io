@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<style>
+
+    .cnt_style{
+        color: blue;
+        text-align: center;
+        font-size: 200px;
+        font-family: Consolas;
+    }
+
+    .class_button {
+
+        color:red ;
+        text-align: center;
+    }
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>计数器</title>
+
+    <p id = "cnt" class="cnt_style">0</p>
+
+    <div class="class_button">
+    <input type="button" id="inc" value="+" onclick="inc()">
+    <input type="button" id="dec" value="-" onclick="dec()">
+    </div>
+
+</head>
+
+<script>
+
+    function inc() {
+        t = parseInt(document.getElementById("cnt").innerHTML) ;
+        document.getElementById("cnt").innerHTML = String(t + 1);
+    }
+
+    function dec() {
+        t = parseInt(document.getElementById("cnt").innerHTML) ;
+        document.getElementById("cnt").innerHTML = String(t - 1);
+    }
+</script>
+<body>
+
+</body>
+</html>
