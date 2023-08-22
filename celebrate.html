@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    .css_query_text {
+        color: #1E90FF;
+        text-align: center;
+        font-size: 3em;
+        font-family: 宋体;
+
+    }
+
+    .css_center {
+        text-align: center;
+    }
+
+    .css_button { /* 按钮美化 */
+        width: 270px; /* 宽度 */
+        height: 40px; /* 高度 */
+        background: none; /* 背景颜色 */
+        cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+        font-family: Microsoft YaHei; /* 设置字体 */
+        color: deepskyblue; /* 字体颜色 */
+        font-size: 17px; /* 字体大小 */
+    }
+
+    .css_celebrate1 {
+        text-align: center;
+        line-height: 1;
+        font-size: 1.5em;
+        color: deeppink;
+        visibility: hidden;
+    }
+
+    .css_flower {
+        text-align: center;
+        line-height: 1;
+        font-size: 5em;
+        visibility: hidden;
+    }
+
+
+</style>
+
+<script>
+    function unlike () {
+        alert ("哼！坏姐姐！哼！你最好是再选一次！");
+    }
+
+    function like () {
+
+        const d0 = new Date(2023, 2, 22);
+        //
+        const sDate = Date.parse(d0);
+        const eDate = Date.now();
+        var delta_day = Math.trunc((eDate - sDate) / (1000*60*60*24) );
+
+        document.getElementById("celebrate1").style.visibility="visible";
+        document.getElementById("celebrate_daycnt").innerHTML=String(delta_day);
+    }
+
+    function continue1() {
+        document.getElementById("celebrate1").remove();
+        document.getElementById("flower").style.visibility="visible";
+        document.getElementById("button2").style.visibility="visible";
+    }
+
+    function continue2() {
+        alert ("祝姐姐七夕节快乐！");
+    }
+</script>
+
+<body>
+
+<p class="css_query_text">姐姐喜不喜欢我？</p>
+
+<div class="css_center">
+    <button class="css_button" onclick="like()">喜欢</button>
+    <br>
+    <br>
+    <button class="css_button" onclick="unlike()">不喜欢</button>
+</div>
+
+<br>
+<br>
+<br>
+<div id="celebrate1" class="css_celebrate1">
+    <p>相识距今已经</p>
+    <p id="celebrate_daycnt" style="font-size: 2em"></p>
+    <p>天</p>
+
+    <button onclick="continue1()"> 继续</button>
+</div>
+
+
+    <div class="css_flower" id="flower">
+        <p>🌹</p>
+    </div>
+
+<div class="css_center">
+    <button onclick="continue2()" id=button2 style="visibility: hidden"> 开心收下</button>
+</div>
+
+</body>
+
+</html>
