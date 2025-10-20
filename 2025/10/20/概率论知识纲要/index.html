@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Title -->
-<title>归档 - Baihua&#39;Blog</title>
+<title>概率论公式纲要 - Baihua&#39;Blog</title>
 
 <!-- Icon -->
 <link rel="icon" href="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg">
@@ -82,52 +82,81 @@
     }
 </script>
 
-                <div class="archives-container gt-bg-theme-color-second">
-    <div class="gt-post-content">
-        
-        
-            <h2 id="year-2025" class="year gt-c-content-color-first">2025</h2>
-            
-            
+                <div class="post-container">
+    <div class="post-detail gt-bg-theme-color-second gt-c-content-color-first">
+        <article class="gt-post-content">
+            <h1 class="post-title">概率论公式纲要</h1>
+            <div class="post-info">
+                <time class="post-time gt-c-content-color-first">
+                    · 2025-10-20 ·</time>
                 
-                    <div class="post" style="margin-left: 15px;">
-                        <a href="/2025/10/20/%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9F%A5%E8%AF%86%E7%BA%B2%E8%A6%81/">
-                            <div class="post-title gt-c-content-color-first">
-                                <small><b>2025-10-20</b></small>
-                                <div class="archives-post-title">概率论公式纲要</div>
-                            </div>
-                        </a>
-                    </div>
+                    
                 
-            
-                
-                    <div class="post" style="margin-left: 15px;">
-                        <a href="/2025/10/20/note_SE/">
-                            <div class="post-title gt-c-content-color-first">
-                                <small><b>2025-10-20</b></small>
-                                <div class="archives-post-title">软件工程笔记</div>
-                            </div>
-                        </a>
-                    </div>
-                
-            
-                
-                    <div class="post" style="margin-left: 15px;">
-                        <a href="/2025/10/18/hello-world/">
-                            <div class="post-title gt-c-content-color-first">
-                                <small><b>2025-10-18</b></small>
-                                <div class="archives-post-title">春风桃李花开日，秋雨梧桐叶落时</div>
-                            </div>
-                        </a>
-                    </div>
-                
-            
-        
-    </div>
-</div>
+            </div>
+            <hr>
+            <div class="post-content gt-c-content-color-first">
+                <h2 id="典型的分布"><a href="#典型的分布" class="headerlink" title="典型的分布"></a>典型的分布</h2><h3 id="泊松分布"><a href="#泊松分布" class="headerlink" title="泊松分布"></a>泊松分布</h3><ul>
+<li>其符号为$\pi$</li>
+</ul>
+<p>$$<br>P{X&#x3D;k}&#x3D;\frac{\lambda^ke^{-\lambda}}{k!},k&#x3D;0,1,2,…,<br>$$</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ul>
+<li><p>估算公式</p>
+<ul>
+<li>$$<br>\lim\limits_{n\rightarrow\infty}C_n^kp_n^k(1-p_n)^{(n-k)}&#x3D;\frac{\lambda^{k}}{k!}e^{-\lambda}<br>$$</li>
+</ul>
+</li>
+<li><p>其期望和方差均为$\lambda$</p>
+</li>
+</ul>
+<h3 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3><ul>
+<li>符号为$E$</li>
+</ul>
+<p>$$<br>f(x)&#x3D;\left{<br>\begin{matrix}<br> \frac{1}{\theta}e^{-\frac{x}{\theta}} &amp;,x&gt;0\<br> 0&amp;,其他<br>\end{matrix}<br>\right.<br>$$</p>
+<h4 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h4><ul>
+<li><p>分布函数<br>$$<br>F(x)&#x3D;\left{<br>\begin{matrix}<br> 1-e^{-\frac{x}{\theta}} &amp;,x&gt;0\<br> 0&amp;,其他<br>\end{matrix}<br>\right.<br>$$</p>
+</li>
+<li><p>其期望为$\theta$，方差为$\theta^2$</p>
+</li>
+</ul>
+<h3 id="正态分布"><a href="#正态分布" class="headerlink" title="正态分布"></a>正态分布</h3><ul>
+<li>其符号为$N$</li>
+</ul>
+<p>$$<br>f(x)&#x3D;\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}},x∈\R<br>$$</p>
+<h4 id="性质-2"><a href="#性质-2" class="headerlink" title="性质"></a>性质</h4><ul>
+<li>查表<br>$$<br>F(x)&#x3D;P{X≤x}&#x3D;\phi(\frac{x-\mu}{\sigma})<br>$$</li>
+</ul>
+<h2 id="协方差和相关系数"><a href="#协方差和相关系数" class="headerlink" title="协方差和相关系数"></a>协方差和相关系数</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>$$<br>Cov(X,Y) &#x3D; E{[X-E(X)][Y-E(Y)]}<br>$$</p>
+<p>$$<br>p_{xy}&#x3D;\frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)})}<br>$$</p>
+<h3 id="性质-3"><a href="#性质-3" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>$D(X+Y)&#x3D;D(X)+D(Y)+2Cov(X,Y)$</li>
+<li>$Cov(X,Y)&#x3D;E(XY)-E(X)E(Y)$</li>
+<li>$Cov(aX,bY)&#x3D;abCov(X,Y)$</li>
+<li>$Cov(X_1+X_2,Y)&#x3D;Cov(X_1,Y)+Cov(X_2,Y)$</li>
+<li>$|p_{xy}|&lt;1$</li>
+</ul>
+<h2 id="切比雪夫不等式"><a href="#切比雪夫不等式" class="headerlink" title="切比雪夫不等式"></a>切比雪夫不等式</h2><p>$$<br>P(|X-E(X)|≥\varepsilon)≤\frac{\sigma^2}{\varepsilon^2}<br>$$</p>
 
-<div class="pagination-container">
+            </div>
+        </article>
+    </div>
+    <br>
     
+        <div class="next-prev-post">
+            
+            
+                <div class="next-post">
+                    <div class="next gt-c-content-color-first">
+                        下一篇：<a href="/2025/10/20/note_SE/" 
+                            class="post-title gt-a-link">软件工程笔记</a>
+                    </div>
+                </div>
+            
+        </div>
+    
+    
+
+    
+
     
 </div>
 
