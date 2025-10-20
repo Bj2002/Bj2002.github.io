@@ -14,7 +14,7 @@
 <meta property="og:description" content="用于考试前再看一遍公式">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-20T14:24:08.130Z">
-<meta property="article:modified_time" content="2025-10-20T15:18:40.461Z">
+<meta property="article:modified_time" content="2025-10-20T15:28:12.293Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -97,92 +97,98 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>用于考试前再看一遍公式 <span id="more"></span> ## 典型的分布</p>
+        <p>用于考试前再看一遍公式</p>
+<span id="more"></span>
+<h2 id="典型的分布">典型的分布</h2>
 <h3 id="泊松分布">泊松分布</h3>
 <ul>
-<li>其符号为<span class="math inline"><em>π</em></span></li>
+<li>其符号为$\pi$</li>
 </ul>
-<p><span class="math display">$$
-P\{X=k\}=\frac{\lambda^ke^{-\lambda}}{k!},k=0,1,2,…,
-$$</span></p>
+<p>$$<br>
+P{X=k}=\frac{\lambda^ke^{-\lambda}}{k!},k=0,1,2,…,<br>
+$$</p>
 <h4 id="性质">性质</h4>
 <ul>
-<li><p>估算公式</p>
+<li>
+<p>估算公式</p>
 <ul>
-<li><span class="math display">$$
-\lim\limits_{n\rightarrow\infty}C_n^kp_n^k(1-p_n)^{(n-k)}=\frac{\lambda^{k}}{k!}e^{-\lambda}
-$$</span></li>
-</ul></li>
-<li><p>其期望和方差均为<span
-class="math inline"><em>λ</em></span></p></li>
+<li>$$<br>
+\lim\limits_{n\rightarrow\infty}C_n^kp_n^k(1-p_n)^{(n-k)}=\frac{\lambda^{k}}{k!}e^{-\lambda}<br>
+$$</li>
+</ul>
+</li>
+<li>
+<p>其期望和方差均为$\lambda$</p>
+</li>
 </ul>
 <h3 id="指数分布">指数分布</h3>
 <ul>
-<li>符号为<span class="math inline"><em>E</em></span></li>
+<li>符号为$E$</li>
 </ul>
-<p><span class="math display">$$
-f(x)=\left\{
-\begin{matrix}
-\frac{1}{\theta}e^{-\frac{x}{\theta}} &amp;,x&gt;0\\
-0&amp;,其他
-\end{matrix}
-\right.
-$$</span></p>
-<h4 id="性质-1">性质</h4>
+<p>$$<br>
+f(x)=\left{<br>
+\begin{matrix}<br>
+\frac{1}{\theta}e^{-\frac{x}{\theta}} &amp;,x&gt;0\<br>
+0&amp;,其他<br>
+\end{matrix}<br>
+\right.<br>
+$$</p>
+<h4 id="性质-2">性质</h4>
 <ul>
-<li><p>分布函数 <span class="math display">$$
-F(x)=\left\{
-\begin{matrix}
-1-e^{-\frac{x}{\theta}} &amp;,x&gt;0\\
-0&amp;,其他
-\end{matrix}
-\right.
-$$</span></p></li>
-<li><p>其期望为<span class="math inline"><em>θ</em></span>，方差为<span
-class="math inline"><em>θ</em><sup>2</sup></span></p></li>
+<li>
+<p>分布函数<br>
+$$<br>
+F(x)=\left{<br>
+\begin{matrix}<br>
+1-e^{-\frac{x}{\theta}} &amp;,x&gt;0\<br>
+0&amp;,其他<br>
+\end{matrix}<br>
+\right.<br>
+$$</p>
+</li>
+<li>
+<p>其期望为$\theta$，方差为$\theta^2$</p>
+</li>
 </ul>
 <h3 id="正态分布">正态分布</h3>
 <ul>
-<li>其符号为<span class="math inline"><em>N</em></span></li>
+<li>其符号为$N$</li>
 </ul>
-<p><span class="math display">$$
-f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}},x∈\R
-$$</span></p>
-<h4 id="性质-2">性质</h4>
+<p>$$<br>
+f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}},x∈\R<br>
+$$</p>
+<h4 id="性质-3">性质</h4>
 <ul>
-<li>查表 <span class="math display">$$
-F(x)=P\{X≤x\}=\phi(\frac{x-\mu}{\sigma})
-$$</span></li>
+<li>查表<br>
+$$<br>
+F(x)=P{X≤x}=\phi(\frac{x-\mu}{\sigma})<br>
+$$</li>
 </ul>
 <h2 id="协方差和相关系数">协方差和相关系数</h2>
 <h3 id="定义">定义</h3>
-<p><span
-class="math display"><em>C</em><em>o</em><em>v</em>(<em>X</em>, <em>Y</em>) = <em>E</em>{[<em>X</em> − <em>E</em>(<em>X</em>)][<em>Y</em> − <em>E</em>(<em>Y</em>)]}</span></p>
-<p><span class="math display">$$
-p_{xy}=\frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)})}
-$$</span></p>
-<h3 id="性质-3">性质</h3>
+<p>$$<br>
+Cov(X,Y) = E{[X-E(X)][Y-E(Y)]}<br>
+$$</p>
+<p>$$<br>
+p_{xy}=\frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)})}<br>
+$$</p>
+<h3 id="性质-4">性质</h3>
 <ul>
-<li><span
-class="math inline"><em>D</em>(<em>X</em> + <em>Y</em>) = <em>D</em>(<em>X</em>) + <em>D</em>(<em>Y</em>) + 2<em>C</em><em>o</em><em>v</em>(<em>X</em>, <em>Y</em>)</span></li>
-<li><span
-class="math inline"><em>C</em><em>o</em><em>v</em>(<em>X</em>, <em>Y</em>) = <em>E</em>(<em>X</em><em>Y</em>) − <em>E</em>(<em>X</em>)<em>E</em>(<em>Y</em>)</span></li>
-<li><span
-class="math inline"><em>C</em><em>o</em><em>v</em>(<em>a</em><em>X</em>, <em>b</em><em>Y</em>) = <em>a</em><em>b</em><em>C</em><em>o</em><em>v</em>(<em>X</em>, <em>Y</em>)</span></li>
-<li><span
-class="math inline"><em>C</em><em>o</em><em>v</em>(<em>X</em><sub>1</sub> + <em>X</em><sub>2</sub>, <em>Y</em>) = <em>C</em><em>o</em><em>v</em>(<em>X</em><sub>1</sub>, <em>Y</em>) + <em>C</em><em>o</em><em>v</em>(<em>X</em><sub>2</sub>, <em>Y</em>)</span></li>
-<li><span
-class="math inline">|<em>p</em><sub><em>x</em><em>y</em></sub>| &lt; 1</span></li>
+<li>$D(X+Y)=D(X)+D(Y)+2Cov(X,Y)$</li>
+<li>$Cov(X,Y)=E(XY)-E(X)E(Y)$</li>
+<li>$Cov(aX,bY)=abCov(X,Y)$</li>
+<li>$Cov(X_1+X_2,Y)=Cov(X_1,Y)+Cov(X_2,Y)$</li>
+<li>$|p_{xy}|&lt;1$</li>
 </ul>
 <h2 id="切比雪夫不等式">切比雪夫不等式</h2>
-<p><span class="math display">$$
-P(|X-E(X)|≥\varepsilon)≤\frac{\sigma^2}{\varepsilon^2}
-$$</span></p>
+<p>$$<br>
+P(|X-E(X)|≥\varepsilon)≤\frac{\sigma^2}{\varepsilon^2}<br>
+$$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/20/%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9F%A5%E8%AF%86%E7%BA%B2%E8%A6%81/" data-id="cuid5WeYFdNLzcJn27nyuwKhL" data-title="概率论公式纲要" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/10/20/%E6%A6%82%E7%8E%87%E8%AE%BA%E7%9F%A5%E8%AF%86%E7%BA%B2%E8%A6%81/" data-id="cuidGmvBY921C4zBTTXVv4y41" data-title="概率论公式纲要" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
