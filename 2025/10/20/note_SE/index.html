@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/IMG_20231209_163913.jpg">
 <meta property="article:published_time" content="2025-10-20T11:15:00.397Z">
-<meta property="article:modified_time" content="2025-10-20T11:44:33.737Z">
+<meta property="article:modified_time" content="2025-10-20T11:51:54.631Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/IMG_20231209_163913.jpg">
@@ -136,7 +136,8 @@
 </ol>
 <h1 id="Part-II-生命周期与过程"><a href="#Part-II-生命周期与过程" class="headerlink" title="Part II 生命周期与过程"></a>Part II 生命周期与过程</h1><h2 id="1、软件生命周期"><a href="#1、软件生命周期" class="headerlink" title="1、软件生命周期"></a>1、软件生命周期</h2><p>软件从立项开始到废止为止，大致分为计划、开发和运行三个时期。</p>
 <p>典型的软件生存周期包括：</p>
-<p>::: center<br>需求分析 → 软件分析 → 软件设计 → 编码 → 测试 → 运行维护<br>:::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需求分析 → 软件分析 → 软件设计 → 编码 → 测试 → 运行维护</span><br></pre></td></tr></table></figure>
+
 <h2 id="2、传统软件过程模型"><a href="#2、传统软件过程模型" class="headerlink" title="2、传统软件过程模型"></a>2、传统软件过程模型</h2><h3 id="瀑布模型（Waterfall-Model）"><a href="#瀑布模型（Waterfall-Model）" class="headerlink" title="瀑布模型（Waterfall Model）"></a>瀑布模型（Waterfall Model）</h3><ul>
 <li><p>阶段顺序执行，前一阶段完成后才能进入下一阶段。</p>
 </li>
@@ -199,7 +200,8 @@
 </li>
 </ul>
 <p>每个阶段分为若干次迭代，每次迭代包含多个工作流：</p>
-<p>::: center<br>需求 → 分析 → 设计 → 实现 → 测试 → 维护<br>:::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需求 → 分析 → 设计 → 实现 → 测试 → 维护</span><br></pre></td></tr></table></figure>
+
 <h2 id="5、软件可行性研究"><a href="#5、软件可行性研究" class="headerlink" title="5、软件可行性研究"></a>5、软件可行性研究</h2><ul>
 <li><p><strong>目的</strong>：判断待开发项目是否值得进行。</p>
 </li>
@@ -444,9 +446,8 @@
 </li>
 </ul>
 <h2 id="2-分析类的三种原型"><a href="#2-分析类的三种原型" class="headerlink" title="2 分析类的三种原型"></a>2 分析类的三种原型</h2><p>根据职责不同，将分析阶段识别的类划分为三种原型：</p>
-<p>::: description<br>负责系统与外部参与者之间的交互，如 GUI、API、打印接口等。</p>
-<p>封装一个用例或一项业务流程的控制逻辑，协调边界类与实体类完成特定任务。</p>
-<p>表示系统中长期存在的信息及相关行为，通常对应业务实体，需持久化存储。<br>:::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">负责系统与外部参与者之间的交互，如 GUI、API、打印接口等。</span><br><span class="line"></span><br><span class="line">封装一个用例或一项业务流程的控制逻辑，协调边界类与实体类完成特定任务。</span><br><span class="line"></span><br><span class="line">表示系统中长期存在的信息及相关行为，通常对应业务实体，需持久化存储。</span><br></pre></td></tr></table></figure>
+
 <h2 id="3-分析过程概要"><a href="#3-分析过程概要" class="headerlink" title="3 分析过程概要"></a>3 分析过程概要</h2><ol>
 <li><p>根据用例图识别参与者和用例。</p>
 </li>
@@ -506,10 +507,10 @@
 <li><p>如何满足非功能需求（性能、复用、可扩展、可维护等）。</p>
 </li>
 </ul>
-<h2 id="2-模块与信息隐藏"><a href="#2-模块与信息隐藏" class="headerlink" title="2 模块与信息隐藏"></a>2 模块与信息隐藏</h2><p>::: description<br>具有明确定义的输入、输出和功能的程序实体，如类、包、构件。</p>
-<p>模块内部数据与实现细节对外不可见，仅通过公共接口访问。<br>:::</p>
-<h2 id="3-模块独立性度量"><a href="#3-模块独立性度量" class="headerlink" title="3 模块独立性度量"></a>3 模块独立性度量</h2><p>::: description<br>衡量模块内部元素彼此结合的紧密程度。<br>理想：功能内聚 &gt; 顺序内聚 &gt; 通信内聚 &gt; 过程内聚 &gt; 时间内聚 &gt;<br>逻辑内聚 &gt; 偶然内聚。</p>
-<p>衡量模块之间相互关联的强度。<br>理想：非直接耦合 &lt; 数据耦合 &lt; 标记耦合 &lt; 控制耦合 &lt; 外部耦合 &lt;<br>公共耦合 &lt; 内容耦合。<br>:::</p>
+<h2 id="2-模块与信息隐藏"><a href="#2-模块与信息隐藏" class="headerlink" title="2 模块与信息隐藏"></a>2 模块与信息隐藏</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">具有明确定义的输入、输出和功能的程序实体，如类、包、构件。</span><br><span class="line"></span><br><span class="line">模块内部数据与实现细节对外不可见，仅通过公共接口访问。</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-模块独立性度量"><a href="#3-模块独立性度量" class="headerlink" title="3 模块独立性度量"></a>3 模块独立性度量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">衡量模块内部元素彼此结合的紧密程度。\</span><br><span class="line">理想：功能内聚 \&gt; 顺序内聚 \&gt; 通信内聚 \&gt; 过程内聚 \&gt; 时间内聚 \&gt;</span><br><span class="line">逻辑内聚 \&gt; 偶然内聚。</span><br><span class="line"></span><br><span class="line">衡量模块之间相互关联的强度。\</span><br><span class="line">理想：非直接耦合 \&lt; 数据耦合 \&lt; 标记耦合 \&lt; 控制耦合 \&lt; 外部耦合 \&lt;</span><br><span class="line">公共耦合 \&lt; 内容耦合。</span><br></pre></td></tr></table></figure>
+
 <h2 id="4-设计任务总览"><a href="#4-设计任务总览" class="headerlink" title="4 设计任务总览"></a>4 设计任务总览</h2><p>面向对象设计分为两大层次：</p>
 <h3 id="4-1-系统架构设计"><a href="#4-1-系统架构设计" class="headerlink" title="4.1 系统架构设计"></a>4.1 系统架构设计</h3><ol>
 <li><p><strong>高层架构设计</strong>：选择分层、MVC、微服务、客户端&#x2F;服务器等总体结构。</p>
@@ -667,7 +668,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/20/note_SE/" data-id="cuidnl5nEf0W2xk-JfPDqljPU" data-title="软件工程笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/10/20/note_SE/" data-id="cuid6BdkviXrSMv9dzV8f-Fa_" data-title="软件工程笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
