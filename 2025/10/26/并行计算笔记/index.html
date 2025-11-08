@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="并行计算笔记 Cache 的 4C 模型    中文名称 英文名称 解释     强制失效 Compulsory Miss 首次访问   容量失效 Capacity Miss 容量不足   冲突失效 Conflict Miss 映射冲突   一致性失效 Coherency Miss 多核不一致    Cache 设计的基本优化方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Baihua&#39;Blog">
+<meta property="og:url" content="http://example.com/2025/10/26/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Baihua&#39;Blog">
+<meta property="og:description" content="并行计算笔记 Cache 的 4C 模型    中文名称 英文名称 解释     强制失效 Compulsory Miss 首次访问   容量失效 Capacity Miss 容量不足   冲突失效 Conflict Miss 映射冲突   一致性失效 Coherency Miss 多核不一致    Cache 设计的基本优化方法">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-10-26T11:41:30.252Z">
+<meta property="article:modified_time" content="2025-11-08T04:37:43.499Z">
+<meta property="article:author" content="Baihua">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/10/26/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/10/26/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/","path":"2025/10/26/并行计算笔记/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | Baihua'Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Baihua'Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">并行计算笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-%E7%9A%84-4c-%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">Cache 的 4C 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache-%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Cache 设计的基本优化方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-cache-%E7%BC%96%E7%A8%8B%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">1.3.</span> <span class="nav-text">基于 Cache 编程的注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">1.4.</span> <span class="nav-text">并行外部存储器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97"><span class="nav-number">1.4.1.</span> <span class="nav-text">磁盘阵列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.4.2.</span> <span class="nav-text">对象存储系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E4%B8%89%E5%A4%A7%E5%86%B2%E7%AA%81"><span class="nav-number">1.5.</span> <span class="nav-text">流水线的三大冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%86%B2%E7%AA%81"><span class="nav-number">1.5.1.</span> <span class="nav-text">结构冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%86%B2%E7%AA%81"><span class="nav-number">1.5.2.</span> <span class="nav-text">数据冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%86%B2%E7%AA%81"><span class="nav-number">1.5.3.</span> <span class="nav-text">控制冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E7%9A%84%E5%BA%94%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">1.6.</span> <span class="nav-text">流水线的应用技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">1.7.</span> <span class="nav-text">云计算的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.8.</span> <span class="nav-text">云计算的服务模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF"><span class="nav-number">1.9.</span> <span class="nav-text">云计算关键技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E7%89%B9%E5%BE%81"><span class="nav-number">1.10.</span> <span class="nav-text">深度学习处理器的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E5%92%8Cgpu%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B7%AE%E5%BC%82"><span class="nav-number">1.11.</span> <span class="nav-text">深度学习处理器和GPU的主要差异</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E5%AE%89%E5%85%A8%E7%9A%84%E5%B1%82%E7%BA%A7"><span class="nav-number">1.12.</span> <span class="nav-text">云安全的层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="nav-number">1.13.</span> <span class="nav-text">云安全问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E5%AE%89%E5%85%A8%E4%B8%8E%E9%9A%90%E7%A7%81%E6%8E%A7%E5%88%B6%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%AD%96%E7%95%A5"><span class="nav-number">1.14.</span> <span class="nav-text">云安全与隐私控制及相关策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E7%AD%96%E7%95%A5%E4%B8%8E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="nav-number">1.14.1.</span> <span class="nav-text">关键策略与控制方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%91%E7%9A%84%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E6%89%8B%E6%AE%B5"><span class="nav-number">1.15.</span> <span class="nav-text">云的数据安全手段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4"><span class="nav-number">1.16.</span> <span class="nav-text">集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.16.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.16.2.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E4%BC%98%E5%8A%BF"><span class="nav-number">1.16.3.</span> <span class="nav-text">主要优势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A7%A3%E5%92%8C%E5%90%8C%E6%AD%A5"><span class="nav-number">1.17.</span> <span class="nav-text">分解和同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E8%A7%A3"><span class="nav-number">1.17.1.</span> <span class="nav-text">分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5"><span class="nav-number">1.17.2.</span> <span class="nav-text">同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E8%A1%8C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.18.</span> <span class="nav-text">并行程序设计模式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Baihua</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/26/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Baihua">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Baihua'Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Baihua'Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-10-26 19:41:30" itemprop="dateCreated datePublished" datetime="2025-10-26T19:41:30+08:00">2025-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-08 12:37:43" itemprop="dateModified" datetime="2025-11-08T12:37:43+08:00">2025-11-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="并行计算笔记">并行计算笔记</h1>
+<h2 id="cache-的-4c-模型">Cache 的 4C 模型</h2>
+<table>
+<thead>
+<tr>
+<th>中文名称</th>
+<th>英文名称</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>强制失效</td>
+<td>Compulsory Miss</td>
+<td>首次访问</td>
+</tr>
+<tr>
+<td>容量失效</td>
+<td>Capacity Miss</td>
+<td>容量不足</td>
+</tr>
+<tr>
+<td>冲突失效</td>
+<td>Conflict Miss</td>
+<td>映射冲突</td>
+</tr>
+<tr>
+<td>一致性失效</td>
+<td>Coherency Miss</td>
+<td>多核不一致</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cache-设计的基本优化方法">Cache 设计的基本优化方法</h2>
+<ul>
+<li><strong>降低 Miss 率</strong>：增加 Cache
+容量、块大小、相联度，改善时空局部性</li>
+<li><strong>降低 Miss 惩罚</strong>：多级 Cache，读优先</li>
+<li><strong>降低命中时间</strong>：避免地址转换延迟，精简索引结构</li>
+</ul>
+<h2 id="基于-cache-编程的注意事项">基于 Cache 编程的注意事项</h2>
+<ul>
+<li><strong>循环交换</strong>：访问顺序与存储顺序一致</li>
+<li><strong>循环融合</strong>：合并相同循环变量的循环</li>
+<li><strong>数组合并</strong>：行数组 → 结构体</li>
+<li><strong>矩阵分块</strong>：提高局部性</li>
+</ul>
+<h2 id="并行外部存储器简介">并行外部存储器简介</h2>
+<h3 id="磁盘阵列">磁盘阵列</h3>
+<ul>
+<li>多磁盘组成的逻辑存储单元</li>
+<li>数据分条、冗余校验</li>
+<li>并行访问提高带宽</li>
+<li>不同级别满足性能与容错需求</li>
+</ul>
+<h3 id="对象存储系统">对象存储系统</h3>
+<ul>
+<li>数据和属性封装为对象</li>
+<li>对象具有唯一标识符</li>
+<li>基于对象访问，智能分布</li>
+<li>元数据管理，并行扩展可靠</li>
+</ul>
+<h2 id="流水线的三大冲突">流水线的三大冲突</h2>
+<h3 id="结构冲突">结构冲突</h3>
+<ul>
+<li><strong>定义</strong>：多指令竞争相同硬件</li>
+<li><strong>解决方法</strong>：
+<ul>
+<li>增设硬件资源</li>
+<li>功能单元细分或复制</li>
+<li>预取和乱序执行</li>
+</ul></li>
+</ul>
+<h3 id="数据冲突">数据冲突</h3>
+<ul>
+<li><strong>定义</strong>：指令间操作数读写时序冲突</li>
+<li><strong>类型</strong>：
+<ul>
+<li>读在写前</li>
+<li>写在读前</li>
+<li>写次序颠倒</li>
+</ul></li>
+<li><strong>解决方法</strong>：
+<ul>
+<li>前递/旁路（直接传递结果）</li>
+<li>流水线互锁（硬件检测并暂停）</li>
+<li>乱序执行</li>
+<li>寄存器重命名（消除WAR/WAW假依赖）</li>
+</ul></li>
+</ul>
+<h3 id="控制冲突">控制冲突</h3>
+<ul>
+<li><strong>定义</strong>：因分支、跳转、子程序调用引发，导致流水线断流</li>
+<li><strong>k级流水线最坏惩罚</strong>：(k−1)τ</li>
+<li><strong>解决方法</strong>：
+<ul>
+<li>静态预测（永不跳转/总是跳转、基于Opcode）</li>
+<li>动态预测（BHT/BTB、2-bit饱和计数器）</li>
+<li>延迟分支（编译器填充延迟槽）</li>
+<li>分支消除（逻辑运算/查表替代条件判断）</li>
+</ul></li>
+</ul>
+<h2 id="流水线的应用技术">流水线的应用技术</h2>
+<ul>
+<li><strong>循环展开</strong>：展开循环体，减少分支、提高并行度</li>
+<li><strong>消除循环相关性</strong>：改变指令顺序或使用前递减少迭代间依赖</li>
+<li><strong>消除循环条件语句</strong>：使用查表或逻辑函数替代</li>
+<li><strong>循环反转</strong>：用 <code>do-while</code> 替代
+<code>while</code>，减少一次分支判断</li>
+<li><strong>分支消除</strong>：用三元运算符、max/min函数、条件选择函数等代替
+if-else</li>
+<li><strong>模块化流水线</strong>：将程序功能模块串联成流水执行结构（常用于视频处理、神经网络等数据流应用）</li>
+<li><strong>少用全局变量</strong></li>
+</ul>
+<h2 id="云计算的特征">云计算的特征</h2>
+<table>
+<colgroup>
+<col style="width: 37%" />
+<col style="width: 62%" />
+</colgroup>
+<thead>
+<tr>
+<th>特性</th>
+<th>具体说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>按需自助服务</td>
+<td>用户可自主按需申请计算资源，无需服务商人工干预</td>
+</tr>
+<tr>
+<td>泛在网络访问</td>
+<td>通过标准设备和互联网访问资源，无需特定硬件或环境</td>
+</tr>
+<tr>
+<td>资源池化</td>
+<td>服务商将资源动态分配给用户，用户无需关注资源物理位置，资源可跨用户共享</td>
+</tr>
+<tr>
+<td>快速弹性</td>
+<td>资源可快速扩展或收缩，支持水平与垂直扩展，用户感知资源”无限可用”</td>
+</tr>
+<tr>
+<td>计量服务</td>
+<td>基于资源实际使用量进行监控、控制与计费，透明可追溯</td>
+</tr>
+</tbody>
+</table>
+<h2 id="云计算的服务模型">云计算的服务模型</h2>
+<ul>
+<li><strong>业务流程即服务（BpaaS）</strong>：提供完整业务流程解决方案，用户仅需使用业务功能，无需管理软件/硬件</li>
+<li><strong>软件即服务（SaaS）</strong>：提供可通过 Web
+访问的应用软件，用户无需安装、维护。用户仅使用软件功能，无需管理运行环境</li>
+<li><strong>平台即服务（PaaS）</strong>：提供开发、测试、部署应用的平台，用户管理应用代码，无需管理底层基础设施</li>
+<li><strong>基础设施即服务（IaaS）</strong>：提供虚拟化基础设施资源，用户管理操作系统、软件与数据，无需管理物理硬件</li>
+</ul>
+<h2 id="云计算关键技术">云计算关键技术</h2>
+<ul>
+<li>虚拟化技术</li>
+<li>资源调度与管理</li>
+<li>云安全</li>
+<li>数据存储与管理</li>
+<li>编程模型与工具</li>
+</ul>
+<h2 id="深度学习处理器的特征">深度学习处理器的特征</h2>
+<ol type="1">
+<li><strong>专用计算单元</strong>
+<ul>
+<li>MAC单元用于矩阵和向量运算</li>
+<li>向量/矩阵功能单元支持大规模并行计算</li>
+<li>专门硬件模块加速常见神经网络操作</li>
+</ul></li>
+<li><strong>内存架构</strong>
+<ul>
+<li>含片上SRAM，存储权重和中间结果</li>
+<li>高带宽低延迟</li>
+<li>加权数据复用机制，减少内存访问次数</li>
+</ul></li>
+<li><strong>跳过零值</strong>
+<ul>
+<li>基于MSM（神经元选择模块）和SIB（突触索引缓冲）</li>
+</ul></li>
+<li><strong>大规模并行计算</strong>
+<ul>
+<li>有利于卷积和全连接</li>
+<li>利用空间局部性减少数据激动</li>
+</ul></li>
+<li><strong>指令集设计</strong>
+<ul>
+<li>有利于数据并行和利用局部性</li>
+<li>支持向量矩阵操作的聚合指令</li>
+</ul></li>
+<li><strong>集成异构系统</strong>
+<ul>
+<li>如Ascend 910</li>
+</ul></li>
+</ol>
+<h2
+id="深度学习处理器和gpu的主要差异">深度学习处理器和GPU的主要差异</h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>DLP</th>
+<th>GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标</td>
+<td>神经网络</td>
+<td>通用并行计算</td>
+</tr>
+<tr>
+<td>单元</td>
+<td>MAC、矩阵单元</td>
+<td>通用CUDA核心</td>
+</tr>
+<tr>
+<td>能效和通用性</td>
+<td>高；低</td>
+<td>低；高</td>
+</tr>
+<tr>
+<td>内存架构</td>
+<td>专用SRAM、数据复用机制</td>
+<td>全局内存+缓存，带宽高但延迟较大</td>
+</tr>
+<tr>
+<td>稀疏支持</td>
+<td>硬件级支持稀疏计算</td>
+<td>通常无</td>
+</tr>
+<tr>
+<td>指令集</td>
+<td>针对向量/矩阵操作优化</td>
+<td>通用</td>
+</tr>
+<tr>
+<td>代表</td>
+<td>Huawei Ascend</td>
+<td>NVIDIA V100/A100</td>
+</tr>
+</tbody>
+</table>
+<h2 id="云安全的层级">云安全的层级</h2>
+<ol type="1">
+<li><strong>物理</strong>：云数据中心等实体</li>
+<li><strong>网络</strong>：网络传输、通信</li>
+<li><strong>系统</strong>：云服务器、操作系统</li>
+<li><strong>应用</strong>：云平台上的应用程序</li>
+<li><strong>人员和流程</strong>：操作规范和业务流程</li>
+</ol>
+<h2 id="云安全问题">云安全问题</h2>
+<ul>
+<li>基础设施故障</li>
+<li>云计算的滥用与恶意使用</li>
+<li>不安全的应用程序编程接口</li>
+<li>恶意内部人员</li>
+<li>共享技术漏洞</li>
+<li>数据丢失 / 泄露</li>
+<li>账号、服务与流量劫持</li>
+</ul>
+<h2 id="云安全与隐私控制及相关策略">云安全与隐私控制及相关策略</h2>
+<ul>
+<li><strong>治理</strong>：策略和战略，解决其宏观问题，定调安全框架</li>
+<li><strong>运营</strong>：战术和实施</li>
+</ul>
+<h3 id="关键策略与控制方法">关键策略与控制方法</h3>
+<ul>
+<li><strong>GRC（治理、风险与合规）</strong>：作为核心框架，统筹安全治理、风险评估与合规检查，确保云安全符合内外部要求</li>
+<li><strong>信任保障</strong>：建立云服务提供商与用户间的安全信任机制</li>
+<li><strong>云架构防护</strong>：技术架构设计层面规避风险</li>
+<li><strong>身份与访问控制</strong></li>
+<li><strong>软件隔离</strong>：隔离不同用户或应用的软件环境</li>
+<li><strong>数据保护</strong>：加密、定期备份、数据脱敏</li>
+<li><strong>IDS（入侵检测系统）</strong>：实时监测云环境中的异常行为与入侵尝试</li>
+</ul>
+<h2 id="云的数据安全手段">云的数据安全手段</h2>
+<ul>
+<li>PDP协议</li>
+<li>加密查询与结果完整性验证</li>
+</ul>
+<h2 id="集群">集群</h2>
+<h3 id="定义">定义</h3>
+<p>集群是由多台完整计算机组成的并行计算机系统，通过高速网络连接，由专用操作系统管理。</p>
+<h3 id="特点">特点</h3>
+<ul>
+<li><strong>节点</strong>：每台计算机称为节点，节点既可以是同构的，也可以是异构的</li>
+<li><strong>架构</strong>：松耦合</li>
+<li><strong>操作系统</strong>：集群操作系统运行于节点操作系统之上</li>
+<li><strong>核心功能</strong>：故障管理、负载均衡、并行计算</li>
+</ul>
+<h3 id="主要优势">主要优势</h3>
+<ul>
+<li>绝对可扩展性</li>
+<li>高可用性</li>
+<li>卓越的性价比</li>
+<li>低成本：可利用遗留系统、普通计算机、以太网及免费操作系统搭建</li>
+<li>投资风险低</li>
+</ul>
+<h2 id="分解和同步">分解和同步</h2>
+<h3 id="分解">分解</h3>
+<p>将计算任务拆分为多个更小的独立单元，在可用内核上并行执行。</p>
+<p><strong>分解的两种类型</strong>： - <strong>功能分解</strong> -
+静态功能分解 - 动态功能分解 - <strong>基于数据的分解</strong> -
+对不同数据集并行执行相同计算 - 事件驱动分解</p>
+<h3 id="同步">同步</h3>
+<p>两个或多个线程协调其行为的过程。</p>
+<ul>
+<li>同步存在开销，需尽可能最小化</li>
+<li>并行计算需要交互，比如两个线程访问同一数据、进行信息交换、相互等待</li>
+</ul>
+<p><strong>并行计算为何需要同步？</strong> -
+<strong>功能依赖</strong>（又称数据依赖）：线程需进行通信 -
+<strong>资源竞争</strong>（例如多个线程访问同一数据）：需引入保护机制</p>
+<h2 id="并行程序设计模式">并行程序设计模式</h2>
+<p>并行程序设计模式将编程过程划分为 4 个核心步骤： 1. 并发识别 2.
+算法结构设计 3. 支撑结构设计 4. 实现机制</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/21/CSP2019%E6%B8%B8%E8%AE%B0/" rel="prev" title="Goodbye OI:CSP 2019游记">
+                  <i class="fa fa-angle-left"></i> Goodbye OI:CSP 2019游记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Baihua</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

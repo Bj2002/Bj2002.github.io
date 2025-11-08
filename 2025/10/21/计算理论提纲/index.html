@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Part Ⅰ 正则语言 有穷自动机 形式化定义 $$ (Q,\Sigma,\delta,q_0,F) $$ 分别表示字母表，状态集合，转移函数，起始状态，接收状态集合">
+    <meta name="description" content="Part Ⅰ 正则语言 有穷自动机 形式化定义 (Q, Σ, δ, q0, F) 分别表示字母表，状态集合，转移函数，起始状态，接收状态集合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算理论知识纲要">
 <meta property="og:url" content="http://example.com/2025/10/21/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA%E6%8F%90%E7%BA%B2/index.html">
 <meta property="og:site_name" content="Baihua&#39;Blog">
-<meta property="og:description" content="Part Ⅰ 正则语言 有穷自动机 形式化定义 $$ (Q,\Sigma,\delta,q_0,F) $$ 分别表示字母表，状态集合，转移函数，起始状态，接收状态集合">
+<meta property="og:description" content="Part Ⅰ 正则语言 有穷自动机 形式化定义 (Q, Σ, δ, q0, F) 分别表示字母表，状态集合，转移函数，起始状态，接收状态集合">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-10-21T04:51:49.417Z">
 <meta property="article:modified_time" content="2025-10-21T05:03:49.042Z">
@@ -128,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-%E2%85%A0-%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Part Ⅰ 正则语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">有穷自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">形式化定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80"><span class="nav-number">1.2.</span> <span class="nav-text">正则语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">广义非确定有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80%E7%9A%84%E6%B3%B5%E5%BC%95%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">关于正则语言的泵引理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.5.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%A1-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">part Ⅱ 上下文无关文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">上下文无关文法的形式化定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%94%E5%A7%86%E6%96%AF%E5%9F%BA%E8%8C%83%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">乔姆斯基范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E6%8E%A8%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">下推自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%B5%E5%BC%95%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">泵引理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-2"><span class="nav-number">2.5.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-%E2%85%A2-%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">Part Ⅲ 可计算性理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">图灵机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89-2"><span class="nav-number">3.1.1.</span> <span class="nav-text">形式化定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AF%86%E5%88%AB"><span class="nav-number">3.1.2.</span> <span class="nav-text">图灵可识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E5%88%A4%E5%AE%9A"><span class="nav-number">3.1.3.</span> <span class="nav-text">图灵可判定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%B8%A6%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">多带图灵机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.5.</span> <span class="nav-text">非确定性图灵机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-3"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-%E2%85%A3-%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA%E9%AB%98%E7%BA%A7%E4%B8%93%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Part Ⅳ 可计算性理论高级专题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%AE%9A%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">递归定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIN%E6%9E%81%E5%B0%8F%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">5.2.</span> <span class="nav-text">MIN极小图灵机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-%E2%85%A4-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">6.</span> <span class="nav-text">Part Ⅴ 时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.1.</span> <span class="nav-text">时间复杂度的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7O%E8%AE%A1%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.2.</span> <span class="nav-text">大O计法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.3.</span> <span class="nav-text">时间复杂度类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%8C%E4%B8%A4%E4%B8%AA%E7%BB%93%E8%AE%BA"><span class="nav-number">6.4.</span> <span class="nav-text">模型之间的关系，两个结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P%E5%92%8CNP%E7%B1%BB%E7%9B%B8%E5%85%B3"><span class="nav-number">6.5.</span> <span class="nav-text">P和NP类相关</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%B0-%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">Part Ⅰ 正则语言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">有穷自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">形式化定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%9C%89%E7%A9%B7%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">1.2.</span> <span class="nav-text">广义非确定有穷自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80%E7%9A%84%E6%B3%B5%E5%BC%95%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">关于正则语言的泵引理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.4.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%B1-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">part Ⅱ 上下文无关文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-number">2.1.</span> <span class="nav-text">上下文无关文法的形式化定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%94%E5%A7%86%E6%96%AF%E5%9F%BA%E8%8C%83%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">乔姆斯基范式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E6%8E%A8%E8%87%AA%E5%8A%A8%E6%9C%BA"><span class="nav-number">2.3.</span> <span class="nav-text">下推自动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%B5%E5%BC%95%E7%90%86"><span class="nav-number">2.4.</span> <span class="nav-text">泵引理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-1"><span class="nav-number">2.5.</span> <span class="nav-text">练习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%B2-%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">Part Ⅲ 可计算性理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.</span> <span class="nav-text">图灵机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">形式化定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AF%86%E5%88%AB"><span class="nav-number">3.1.2.</span> <span class="nav-text">图灵可识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E5%88%A4%E5%AE%9A"><span class="nav-number">3.1.3.</span> <span class="nav-text">图灵可判定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%B8%A6%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.4.</span> <span class="nav-text">多带图灵机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">3.1.5.</span> <span class="nav-text">非确定性图灵机</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0-2"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%B3-%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA%E9%AB%98%E7%BA%A7%E4%B8%93%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Part Ⅳ 可计算性理论高级专题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E5%AE%9A%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">递归定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min%E6%9E%81%E5%B0%8F%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="nav-number">5.2.</span> <span class="nav-text">MIN极小图灵机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-%E2%85%B4-%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">6.</span> <span class="nav-text">Part Ⅴ 时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.1.</span> <span class="nav-text">时间复杂度的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7o%E8%AE%A1%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.2.</span> <span class="nav-text">大O计法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">6.3.</span> <span class="nav-text">时间复杂度类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB%E4%B8%A4%E4%B8%AA%E7%BB%93%E8%AE%BA"><span class="nav-number">6.4.</span> <span class="nav-text">模型之间的关系，两个结论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#p%E5%92%8Cnp%E7%B1%BB%E7%9B%B8%E5%85%B3"><span class="nav-number">6.5.</span> <span class="nav-text">P和NP类相关</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -211,38 +211,39 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="Part-Ⅰ-正则语言">Part Ⅰ 正则语言</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="part-ⅰ-正则语言">Part Ⅰ 正则语言</h2>
 <h3 id="有穷自动机">有穷自动机</h3>
 <h4 id="形式化定义">形式化定义</h4>
-<p>$$<br>
-(Q,\Sigma,\delta,q_0,F)<br>
-$$</p>
-<p>分别表示字母表，状态集合，转移函数，起始状态，接收状态集合</p>
-<span id="more"></span>
-<h3 id="正则语言">正则语言</h3>
+<p><span
+class="math display">(<em>Q</em>, <em>Σ</em>, <em>δ</em>, <em>q</em><sub>0</sub>, <em>F</em>)</span></p>
+<p>分别表示字母表，状态集合，转移函数，起始状态，接收状态集合
+<span id="more"></span> ### 正则语言</p>
 <ul>
-<li>
-<p>有穷自动机判定的语言叫做 <strong>正则语言</strong>。</p>
-</li>
-<li>
-<p>正则语言在正则云算下是封闭的，包括并、连接和*</p>
-</li>
-<li>
-<p>非确定性有穷自动机和确定性有穷自动机等价。因此，正则语言也可与被非确定性有穷自动机识别。</p>
-</li>
-<li>
-<p><strong>正则表达式</strong>是用正则运算构造的表达式，和有穷自动机具备等价性。</p>
-</li>
+<li><p>有穷自动机判定的语言叫做 <strong>正则语言</strong>。</p></li>
+<li><p>正则语言在正则云算下是封闭的，包括并、连接和*</p></li>
+<li><p>非确定性有穷自动机和确定性有穷自动机等价。因此，正则语言也可与被非确定性有穷自动机识别。</p></li>
+<li><p><strong>正则表达式</strong>是用正则运算构造的表达式，和有穷自动机具备等价性。</p></li>
 </ul>
 <h3 id="广义非确定有穷自动机">广义非确定有穷自动机</h3>
-<p>仅有一个起始状态和一个接收状态。形式化定义为$(Q,\Sigma,\delta,q_{start},q_{accept})$。分别表示字母表，状态集合，转移函数，起始状态，接收状态。</p>
+<p>仅有一个起始状态和一个接收状态。形式化定义为<span
+class="math inline">(<em>Q</em>, <em>Σ</em>, <em>δ</em>, <em>q</em><sub><em>s</em><em>t</em><em>a</em><em>r</em><em>t</em></sub>, <em>q</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub>)</span>。分别表示字母表，状态集合，转移函数，起始状态，接收状态。</p>
 <h3 id="关于正则语言的泵引理">关于正则语言的泵引理</h3>
 <p>用于证明非正则语言。</p>
-<p>若$A$是一个正则语言，存在一个泵长度$p$，使得，如果$s$是$A$中任一长度不小于$p$的串，那么$s$可以被分为$3$段，$s=xyz$，满足：</p>
-<ol>
-<li>对于每一个$i \ge 0,xy^iz \in A$</li>
-<li>$|y| &gt; 0$</li>
-<li>$|xy | \le p$</li>
+<p>若<span
+class="math inline"><em>A</em></span>是一个正则语言，存在一个泵长度<span
+class="math inline"><em>p</em></span>，使得，如果<span
+class="math inline"><em>s</em></span>是<span
+class="math inline"><em>A</em></span>中任一长度不小于<span
+class="math inline"><em>p</em></span>的串，那么<span
+class="math inline"><em>s</em></span>可以被分为<span
+class="math inline">3</span>段，<span
+class="math inline"><em>s</em> = <em>x</em><em>y</em><em>z</em></span>，满足：</p>
+<ol type="1">
+<li>对于每一个<span
+class="math inline"><em>i</em> ≥ 0, <em>x</em><em>y</em><sup><em>i</em></sup><em>z</em> ∈ <em>A</em></span></li>
+<li><span class="math inline">|<em>y</em>| &gt; 0</span></li>
+<li><span
+class="math inline">|<em>x</em><em>y</em>| ≤ <em>p</em></span></li>
 </ol>
 <h3 id="练习">练习</h3>
 <ul>
@@ -252,44 +253,47 @@ $$</p>
 <li>确定有穷自动机转化为广义非确定有穷自动机。（练习1.21）</li>
 <li>用泵引理证明不是正则的。（例题、练习1.29）</li>
 </ul>
-<h2 id="part-Ⅱ-上下文无关文法">part Ⅱ 上下文无关文法</h2>
+<h2 id="part-ⅱ-上下文无关文法">part Ⅱ 上下文无关文法</h2>
 <h3 id="上下文无关文法的形式化定义">上下文无关文法的形式化定义</h3>
 <p>一个文法由一组替换规则组成，替换规则又称为产生式，符号称为变元，字符串由变元和终结符组成。终结符一般为大写字母。</p>
 <p><strong>正则语言</strong> 都可以用上下文无关文法表示。</p>
 <h3 id="乔姆斯基范式">乔姆斯基范式</h3>
-<p>形如：<br>
-$$<br>
-A \rightarrow BC<br>
-\newline<br>
-A \rightarrow a<br>
-$$<br>
-此外，允许$S \rightarrow \epsilon$</p>
+<p>形如： <span class="math display">$$
+A \rightarrow BC
+\newline
+A \rightarrow a
+$$</span> 此外，允许<span
+class="math inline"><em>S</em> → <em>ϵ</em></span></p>
 <h3 id="下推自动机">下推自动机</h3>
-<p>$$<br>
-(Q,\Sigma,\Gamma,\delta,q_0,F)<br>
-$$</p>
+<p><span
+class="math display">(<em>Q</em>, <em>Σ</em>, <em>Γ</em>, <em>δ</em>, <em>q</em><sub>0</sub>, <em>F</em>)</span></p>
 <p>分别表示状态集、输入字母表、栈字母表、转移函数、起始状态、接受状态集。</p>
 <p>上下文无关文法与下推自动机对应。具有等价性。</p>
 <h3 id="泵引理">泵引理</h3>
-<p>对于一个上下文无关语言，存在一个$p$，使得$A$中任意长度不小于$p$的$s$能够分为$5$段，$s=uvxyz$，满足：<br>
-$$<br>
-对于i \ge 0,uv^ixy^iz \in A<br>
-\newline<br>
-|xy| \gt 0<br>
-\newline<br>
-|vxy| \le p<br>
-$$</p>
-<h3 id="练习-2">练习</h3>
+<p>对于一个上下文无关语言，存在一个<span
+class="math inline"><em>p</em></span>，使得<span
+class="math inline"><em>A</em></span>中任意长度不小于<span
+class="math inline"><em>p</em></span>的<span
+class="math inline"><em>s</em></span>能够分为<span
+class="math inline">5</span>段，<span
+class="math inline"><em>s</em> = <em>u</em><em>v</em><em>x</em><em>y</em><em>z</em></span>，满足：
+<span class="math display">$$
+对于i \ge 0,uv^ixy^iz \in A
+\newline
+|xy| \gt 0
+\newline
+|vxy| \le p
+$$</span></p>
+<h3 id="练习-1">练习</h3>
 <ul>
 <li>将上下文无关文法转化为等价的下推自动机</li>
 <li>利用泵引理证明（练习2.32）</li>
 </ul>
-<h2 id="Part-Ⅲ-可计算性理论">Part Ⅲ 可计算性理论</h2>
+<h2 id="part-ⅲ-可计算性理论">Part Ⅲ 可计算性理论</h2>
 <h3 id="图灵机">图灵机</h3>
-<h4 id="形式化定义-2">形式化定义</h4>
-<p>$$<br>
-(Q,\Sigma,\Gamma,\delta,q_0,q_{accept},q_{reject})<br>
-$$</p>
+<h4 id="形式化定义-1">形式化定义</h4>
+<p><span
+class="math display">(<em>Q</em>, <em>Σ</em>, <em>Γ</em>, <em>δ</em>, <em>q</em><sub>0</sub>, <em>q</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub>, <em>q</em><sub><em>r</em><em>e</em><em>j</em><em>e</em><em>c</em><em>t</em></sub>)</span></p>
 <p>分别是状态集、输入字母表、带字母表、转移函数、起始状态、接受状态、拒绝状态。</p>
 <h4 id="图灵可识别">图灵可识别</h4>
 <p>可能会循环，或者接受，或者停机</p>
@@ -299,73 +303,52 @@ $$</p>
 <p>多带图灵机和单带图灵机等价，可以转换。</p>
 <h4 id="非确定性图灵机">非确定性图灵机</h4>
 <p>等价于确定性图灵机；</p>
-<h2 id="练习-3">练习</h2>
+<h2 id="练习-2">练习</h2>
 <ul>
-<li>
-<p>给出图灵机和输入，模拟运行（例3.4，例3.5）</p>
-</li>
-<li>
-<p>可判定问题的证明</p>
+<li><p>给出图灵机和输入，模拟运行（例3.4，例3.5）</p></li>
+<li><p>可判定问题的证明</p>
 <ul>
-<li>
-<p>确定性有穷自动机接受问题</p>
-</li>
-<li>
-<p>非确定有穷自动机的接受问题</p>
-</li>
-<li>
-<p>正则表达式的派生问题</p>
-</li>
-<li>
-<p>确定性自动机、上下文无关文法的空性问题、等价性问题、派生问题</p>
-</li>
-<li>
-<p>线性界限自动机（例5.8）</p>
-</li>
-</ul>
-</li>
-<li>
-<p>存在不能被任何图灵机识别的语言（例4.15）</p>
-</li>
-<li>
-<p>图灵可识别，补可识别的语言，就是图灵可判定的（例4.16）</p>
-</li>
-<li>
-<p>满映射、相同规模、对应的定义（4.10，4.12）</p>
-</li>
-<li>
-<p>证明不可判定；假设可判定，构造图灵机，找到矛盾；</p>
+<li><p>确定性有穷自动机接受问题</p></li>
+<li><p>非确定有穷自动机的接受问题</p></li>
+<li><p>正则表达式的派生问题</p></li>
+<li><p>确定性自动机、上下文无关文法的空性问题、等价性问题、派生问题</p></li>
+<li><p>线性界限自动机（例5.8）</p></li>
+</ul></li>
+<li><p>存在不能被任何图灵机识别的语言（例4.15）</p></li>
+<li><p>图灵可识别，补可识别的语言，就是图灵可判定的（例4.16）</p></li>
+<li><p>满映射、相同规模、对应的定义（4.10，4.12）</p></li>
+<li><p>证明不可判定；假设可判定，构造图灵机，找到矛盾；</p>
 <ul>
 <li>停机问题、空性问题、正则问题、等价性问题（5.1到5.4）</li>
 <li>计算历史的定义、线性界限自动机的定义（接受性问题、空性问题）、可计算函数的定义、映射可规约的定义和相关结论。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Part-Ⅳ-可计算性理论高级专题">Part Ⅳ 可计算性理论高级专题</h2>
+<h2 id="part-ⅳ-可计算性理论高级专题">Part Ⅳ 可计算性理论高级专题</h2>
 <h3 id="递归定理">递归定理</h3>
 <ul>
-<li>证明$A_{TM}$不可判定</li>
+<li>证明<span
+class="math inline"><em>A</em><sub><em>T</em><em>M</em></sub></span>不可判定</li>
 </ul>
-<h3 id="MIN极小图灵机">MIN极小图灵机</h3>
+<h3 id="min极小图灵机">MIN极小图灵机</h3>
 <ul>
 <li>定义</li>
 <li>不是图灵可识别的</li>
 </ul>
-<h2 id="Part-Ⅴ-时间复杂度">Part Ⅴ 时间复杂度</h2>
+<h2 id="part-ⅴ-时间复杂度">Part Ⅴ 时间复杂度</h2>
 <h3 id="时间复杂度的定义">时间复杂度的定义</h3>
 <ul>
 <li>图灵机经过的最大的步数</li>
 </ul>
-<h3 id="大O计法的定义">大O计法的定义</h3>
+<h3 id="大o计法的定义">大O计法的定义</h3>
 <ul>
 <li>由函数写出渐进函数。</li>
 </ul>
 <h3 id="时间复杂度类的定义">时间复杂度类的定义</h3>
-<h3 id="模型之间的关系，两个结论">模型之间的关系，两个结论</h3>
+<h3 id="模型之间的关系两个结论">模型之间的关系，两个结论</h3>
 <ul>
 <li>多带图灵机和单带图灵机之间的复杂度关系</li>
 </ul>
-<h3 id="P和NP类相关">P和NP类相关</h3>
+<h3 id="p和np类相关">P和NP类相关</h3>
 <ul>
 <li>P类的定义</li>
 <li>NP类的定义</li>
